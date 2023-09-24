@@ -1,4 +1,4 @@
-package team1.vn.controller;
+package team1.vn.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
