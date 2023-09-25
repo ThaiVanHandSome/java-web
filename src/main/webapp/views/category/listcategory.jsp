@@ -9,9 +9,10 @@
 </head>
 <body>
 	<van:forEach var="item" items="${listcate}">
-		${item.cateID }
-		<br>
+		<a href="/Website_Tuan2_Hello/findOne?cateID=${item.cateID}">${item.cateID}</a>
+		<t>
 		${item.cateName }
+		<br>
 	</van:forEach>
 </body>
 </html>
