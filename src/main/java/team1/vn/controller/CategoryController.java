@@ -18,23 +18,29 @@ import team1.vn.DAO.DBConnectionSqlServer;
 import team1.vn.DAO.categoryDAOImpl;
 import team1.vn.DAO.iCategoryDAO;
 import team1.vn.models.CategoryModel;
+import team1.vn.services.CategoryServiceImpl;
+import team1.vn.services.ICategoryService;
 
 @WebServlet(urlPatterns = { "/category/listcate" })
 public class CategoryController extends HttpServlet {
 	public static final long serialVersionUID = 1L;
-	iCategoryDAO categoryDAO = new categoryDAOImpl();
-
+	
+	// declare object service
+	ICategoryService categoryService = new CategoryServiceImpl();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		findAll(req, resp);
 	}
 
-	// hiển thị tất cả dữ liệu của category
+	// display all data of category
 	private void findAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<CategoryModel> categoryList = categoryDAO.findAll();
-		// đẩy dữ liệu ra view
+		List<CategoryModel> categoryList = categoryService.findAll();
+		
+		// push data to view
 		req.setAttribute("listcate", categoryList);
-		// view sẽ lấy dữ liệu
+		
+		// view will get data
 		RequestDispatcher rd = req.getRequestDispatcher("/views/category/listcategory.jsp");
 		rd.forward(req, resp);
 	}

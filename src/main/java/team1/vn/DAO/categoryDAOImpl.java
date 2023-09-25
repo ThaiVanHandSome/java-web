@@ -36,10 +36,35 @@ public class categoryDAOImpl implements iCategoryDAO {
 				cate.setImage(rs.getString("image"));
 				list.add(cate);
 			}
+			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	// execute data for insert
+	@Override
+	public void insert(CategoryModel model) {
+		String sql = "INSERT INTO CATEGORY(name, image) VALUES (?,?)";
+		try {
+			conn = new DBConnectionSqlServer().getConnection(); // connect database
+			
+			// use query
+			ps = conn.prepareStatement(sql);
+			
+			// transmit value into variables
+			ps.setString(1, model.getCateName());
+			ps.setString(2, model.getImage());
+			
+			// execute query
+			ps.executeUpdate();
+			
+			// disconnect
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
