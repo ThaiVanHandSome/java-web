@@ -69,9 +69,8 @@ public class categoryDAOImpl implements iCategoryDAO {
 	}
 
 	@Override
-	// handle data update
+	// handle update data
 	public void update(CategoryModel model) {
-
 	}
 
 	@Override

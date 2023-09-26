@@ -54,8 +54,14 @@ public class CategoryController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURL().toString();
 
+		// handle insert data
 		if (url.contains("insert")) {
 			insert(req, resp);
+		}
+		
+		// handle update data
+		if(url.contains("findOne")) {
+			
 		}
 	}
 
