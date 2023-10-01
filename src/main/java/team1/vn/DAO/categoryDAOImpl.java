@@ -19,7 +19,7 @@ public class categoryDAOImpl implements iCategoryDAO {
 	public List<CategoryModel> findAll() {
 		// tạo các biến
 		List<CategoryModel> list = new ArrayList<CategoryModel>();
-		String sql = "SELECT * FROM CATEGORY";
+		String sql = "SELECT * FROM Category";
 
 		try {
 			// kết nối database
@@ -47,7 +47,7 @@ public class categoryDAOImpl implements iCategoryDAO {
 	// execute data for insert
 	@Override
 	public void insert(CategoryModel model) {
-		String sql = "INSERT INTO CATEGORY(name, image) VALUES (?,?)";
+		String sql = "INSERT INTO Category(name, image) VALUES (?,?)";
 		try {
 			conn = new DBConnectionSqlServer().getConnection(); // connect database
 
@@ -75,7 +75,7 @@ public class categoryDAOImpl implements iCategoryDAO {
 
 	@Override
 	public CategoryModel findOne(int id) {
-		String sql = "SELECT * FROM CATEGORY WHERE CATEGORY.id = ?";
+		String sql = "SELECT * FROM Category WHERE Category.id = ?";
 		try {
 			conn = new DBConnectionSqlServer().getConnection();
 			ps = conn.prepareStatement(sql);
@@ -83,7 +83,7 @@ public class categoryDAOImpl implements iCategoryDAO {
 			rs = ps.executeQuery();
 			CategoryModel model = new CategoryModel();
 			while(rs.next()) {
-				model.setCateID(rs.getInt(1));
+				model.setCateID(id);
 				model.setCateName(rs.getString(2));
 				model.setImage(rs.getString(3));
 			}

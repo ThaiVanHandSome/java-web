@@ -18,7 +18,6 @@ public class CategoryModel implements Serializable {
 
 	public CategoryModel(int cateID, String cateName, String image) {
 		super();
-		this.cateID = cateID;
 		this.cateName = cateName;
 		this.image = image;
 	}
@@ -27,7 +26,7 @@ public class CategoryModel implements Serializable {
 	public int getCateID() {
 		return cateID;
 	}
-
+	
 	public void setCateID(int cateID) {
 		this.cateID = cateID;
 	}
@@ -52,8 +51,9 @@ public class CategoryModel implements Serializable {
 	// định dạng chuỗi dữ liệu
 	@Override
 	public String toString() {
-		return "CategoryModel [cateID=" + cateID + ", cateName=" + cateName + ", image=" + image + "]";
+		return "CategoryModel [cateName=" + cateName + ", image=" + image + "]";
 	}
+
 	
 
 }
