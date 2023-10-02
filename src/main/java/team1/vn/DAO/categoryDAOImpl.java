@@ -71,6 +71,20 @@ public class categoryDAOImpl implements iCategoryDAO {
 	@Override
 	// handle update data
 	public void update(CategoryModel model) {
+		String sql = "update Category set Category.name=?, image=? where id = ?";
+		try {
+			conn = new DBConnectionSqlServer().getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, model.getCateName());
+			ps.setString(2, model.getImage());
+			ps.setInt(3, model.getCateID());
+			
+			ps.executeUpdate();
+			conn.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -93,6 +107,22 @@ public class categoryDAOImpl implements iCategoryDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public void delete(int id) {
+		String sql = "delete from Category where id = ?";
+		try {
+			conn = new DBConnectionSqlServer().getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			
+			ps.executeUpdate();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

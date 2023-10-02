@@ -18,14 +18,20 @@
 		<button type="submit">Update Category</button>
 	</form> --%>
 	<div class="container">
-		<form action="insert" method="post">
+		<form action="update" method="post">
 			<div class="form-group">
-				<label>Name</label> <input name="cateName" value="${cate.getCateName() }" class="form-control"
+				<label>Id</label> <input name="cateID"
+					value="${cate.getCateID() }" class="form-control"
 					placeholder="Enter name...">
 			</div>
 			<div class="form-group">
-				<label>Image</label> <input name="image" value="${cate.getImage() }" class="form-control"
-					placeholder="Enter image...">
+				<label>Name</label> <input name="cateName"
+					value="${cate.getCateName() }" class="form-control"
+					placeholder="Enter name...">
+			</div>
+			<div class="form-group">
+				<label>Image</label> <input name="image" value="${cate.getImage() }"
+					class="form-control" placeholder="Enter image...">
 			</div>
 			<button type="submit" class="btn btn-primary">Update</button>
 		</form>

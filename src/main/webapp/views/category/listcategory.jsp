@@ -14,19 +14,38 @@
 </head>
 <body>
 	<div class="container">
+		<van:if test="${message != null || error != null}">
+			<div class="modal fade" role="dialog" aria-labelledby="exampleModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title">
+								<van:if test="${message != null}">${message }</van:if>
+								<van:if test="${error != null}">${error }</van:if>
+							</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+		</van:if>
 		<table class="table table-bordered table-striped table-hover">
 			<thead>
 				<tr class="table-primary">
 					<th scope="col">Id</th>
 					<th scope="col">Name</th>
+					<th scope="col">Action</th>
 				</tr>
 			</thead>
 			<tbody>
 				<van:forEach var="item" items="${listcate}">
 					<tr>
+						<td>${item.getCateID() }</td>
+						<td>${item.getCateName() }</td>
 						<td><a
-							href="/Website_Tuan2_Hello/findOne?cateID=${item.getCateID()}">${item.getCateID()}</a></td>
-						<td>${item.getCateName() }</td>	
+							href="/Website_Tuan2_Hello/category/update?id=${item.getCateID()}">Update</a>
+							<a
+							href="/Website_Tuan2_Hello/category/delete?id=${item.getCateID()}">Delete</a>
+						</td>
 					</tr>
 				</van:forEach>
 			</tbody>

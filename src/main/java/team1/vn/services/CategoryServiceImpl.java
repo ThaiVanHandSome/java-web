@@ -23,11 +23,23 @@ public class CategoryServiceImpl implements ICategoryService {
 	@Override
 	// check data update
 	public void update(CategoryModel model) {
+		// Is data changed?
+		CategoryModel newModel = cateDAO.findOne(model.getCateID());
+		newModel.setCateID(model.getCateID());
+		newModel.setCateName(model.getCateName());
+		newModel.setImage(model.getImage());
 		
+		
+		cateDAO.update(newModel);
 	}
 
 	@Override
 	public CategoryModel findOne(int id) {
 		return cateDAO.findOne(id);
+	}
+
+	@Override
+	public void delete(int id) {
+		cateDAO.delete(id);
 	}
 }

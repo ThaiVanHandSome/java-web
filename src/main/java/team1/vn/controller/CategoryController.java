@@ -21,7 +21,7 @@ import team1.vn.models.CategoryModel;
 import team1.vn.services.CategoryServiceImpl;
 import team1.vn.services.ICategoryService;
 
-@WebServlet(urlPatterns = { "/category/listcate", "/category/insert", "/findOne" })
+@WebServlet(urlPatterns = { "/category/listcate", "/category/insert", "/findOne", "/category/update", "/category/delete" })
 public class CategoryController extends HttpServlet {
 	public static final long serialVersionUID = 1L;
 
@@ -47,6 +47,23 @@ public class CategoryController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (url.contains("update")) {
+			int id = Integer.parseInt(req.getParameter("id"));
+			CategoryModel model = categoryService.findOne(id);
+			req.setAttribute("cate", model);
+			RequestDispatcher rd = req.getRequestDispatcher("/views/category/updatecategory.jsp");
+			rd.forward(req, resp);
+		} else if (url.contains("delete")) {
+			int id = Integer.parseInt(req.getParameter("id"));
+			try {
+				categoryService.delete(id);
+				req.setAttribute("message", "Delete successful!");			
+				RequestDispatcher rd = req.getRequestDispatcher("listcate");
+				rd.forward(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+				req.setAttribute("error", "Fail!");
+			}
 		}
 	}
 
@@ -57,12 +74,35 @@ public class CategoryController extends HttpServlet {
 		// handle insert data
 		if (url.contains("insert")) {
 			insert(req, resp);
+		} else if (url.contains("findOne")) {
+
+		} else if (url.contains("update")) {
+			update(req, resp);
 		}
-		
-		// handle update data
-		if(url.contains("findOne")) {
-			
-		}
+	}
+
+	private void update(HttpServletRequest req, HttpServletResponse resp) throws IOException  {
+		// encode UTF-8
+		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
+
+		// recieve data from Form
+		int id = Integer.parseInt(req.getParameter("cateID"));
+		String name = req.getParameter("cateName");
+		String image = req.getParameter("image");
+
+		// declare model and add data into model
+		CategoryModel model = new CategoryModel();
+		model.setCateID(id);
+		model.setCateName(name);
+		model.setImage(image);
+
+		// call method update
+		categoryService.update(model);
+
+		// change page (transfer page)
+		resp.sendRedirect("listcate");
+
 	}
 
 	private void insert(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
