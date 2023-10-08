@@ -32,9 +32,9 @@ public class categoryDAOImpl implements iCategoryDAO {
 			// đọc resultset đưa vào model
 			while (rs.next()) {
 				CategoryModel cate = new CategoryModel();
-				cate.setCateID(rs.getInt("id"));
-				cate.setCateName(rs.getString("name"));
-				cate.setImage(rs.getString("image"));
+				cate.setCateID(rs.getInt("CategoryID"));
+				cate.setCateName(rs.getString("CategoryName"));
+				cate.setImage(rs.getString("icon"));
 				list.add(cate);
 			}
 			conn.close();
@@ -47,7 +47,7 @@ public class categoryDAOImpl implements iCategoryDAO {
 	// execute data for insert
 	@Override
 	public void insert(CategoryModel model) {
-		String sql = "INSERT INTO Category(name, image) VALUES (?,?)";
+		String sql = "INSERT INTO Category(CategoryName, icon) VALUES (?,?)";
 		try {
 			conn = new DBConnectionSqlServer().getConnection(); // connect database
 
@@ -71,7 +71,7 @@ public class categoryDAOImpl implements iCategoryDAO {
 	@Override
 	// handle update data
 	public void update(CategoryModel model) {
-		String sql = "update Category set Category.name=?, image=? where id = ?";
+		String sql = "update Category set Category.CategoryName=?, Category.icon=? where Category.CategoryID = ?";
 		try {
 			conn = new DBConnectionSqlServer().getConnection();
 			ps = conn.prepareStatement(sql);
@@ -89,7 +89,7 @@ public class categoryDAOImpl implements iCategoryDAO {
 
 	@Override
 	public CategoryModel findOne(int id) {
-		String sql = "SELECT * FROM Category WHERE Category.id = ?";
+		String sql = "SELECT * FROM Category WHERE Category.CategoryID = ?";
 		try {
 			conn = new DBConnectionSqlServer().getConnection();
 			ps = conn.prepareStatement(sql);
@@ -111,7 +111,7 @@ public class categoryDAOImpl implements iCategoryDAO {
 
 	@Override
 	public void delete(int id) {
-		String sql = "delete from Category where id = ?";
+		String sql = "delete from Category where Category.CategoryID = ?";
 		try {
 			conn = new DBConnectionSqlServer().getConnection();
 			ps = conn.prepareStatement(sql);
